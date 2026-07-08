@@ -35,3 +35,40 @@ Mobile app -> VSRV -> VNMS -> Vigelo device
 VSRV owns users, households, device ownership, subscriptions, alert policy, push
 delivery, and the mobile API. VNMS owns device-network state and low-level device
 facts.
+
+## Local MVP
+
+The current implementation is a dependency-free responsive web prototype for the
+mobile flow. It talks to the local VSRV MVP at `http://127.0.0.1:8090`.
+
+Run the backend first:
+
+```sh
+cd ../vigelo-backend
+go run ./cmd/vsrv
+```
+
+Then run the frontend:
+
+```sh
+npm run dev
+```
+
+Open:
+
+```text
+http://127.0.0.1:5173
+```
+
+Demo flow:
+
+1. Create an account with the prefilled values.
+2. Claim a device with `device_id=860123456789012&key=dev`.
+3. Activate monitoring service.
+4. Save monitored hours.
+5. Load activity and alerts.
+6. Register a demo push token.
+
+The prototype stores the access token in `localStorage` because it is a web MVP.
+The production mobile app must use iOS Keychain or Android secure storage as
+documented in [`docs/security-privacy.md`](docs/security-privacy.md).
